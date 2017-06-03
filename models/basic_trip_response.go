@@ -3,11 +3,11 @@ package models
 import "gopkg.in/mgo.v2/bson"
 
 type BasicTripResponse struct {
-	Id             bson.ObjectId `json:"id"`
-	LocationName   string        `json:"locationName"`
-	TimePeriod     TimePeriod    `json:"timePeriod"`
-	ActivityBudget float64       `json:"activityBudget"`
-	MaxDistance    float64       `json:"maxDistance"`
+	Id             bson.ObjectId `json:"id" bson:"_id"`
+	LocationName   string        `json:"locationName" bson:"location_name"`
+	TimePeriod     TimePeriod    `json:"timePeriod" bson:"time_period"`
+	ActivityBudget float64       `json:"activityBudget" bson:"activity_budget"`
+	MaxDistance    float64       `json:"maxDistance" bson:"max_distance"`
 }
 
 func GetMyTrips(userId bson.ObjectId) ([]BasicTripResponse, error) {
