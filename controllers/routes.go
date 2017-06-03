@@ -18,6 +18,10 @@ func CreateRouter() http.Handler {
 
 	apiV0Router.HandleFunc("/trips", Use(api.V0_CreateTrip, RequireUserForAPI)).Methods("POST")
 	apiV0Router.HandleFunc("/trips/{tripId}", Use(api.V0_GetTrip, RequireUserForAPI)).Methods("GET")
+	apiV0Router.HandleFunc("/trips/{tripId}/recommendations", Use(api.V0_GetActivityRecommendationsForTrip, RequireUserForAPI)).Methods("GET")
+
+	// TODO - get activity details
+	// TODO - commit to an activity
 
 	marketingSiteFS := http.StripPrefix("/static/", http.FileServer(http.Dir("./static/")))
 	router.PathPrefix("/static/").Handler(marketingSiteFS).Methods("GET")

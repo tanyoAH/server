@@ -68,3 +68,23 @@ func V0_GetMyTrips(w http.ResponseWriter, r *http.Request) {
 
 	utils.JSONSuccess(w, resp, "Successfully returned trip")
 }
+
+func V0_GetActivityRecommendationsForTrip(w http.ResponseWriter, r *http.Request) {
+	tripId := utils.GetMuxPathIds(r)["tripId"]
+	if !tripId.Valid() {
+		utils.JSONBadRequestError(w, "Invalid trip id", "")
+		return
+	}
+
+	trip := models.Trip{Id: tripId}
+	err := trip.FindById()
+	if err != nil {
+		utils.JSONNotFoundError(w, "Trip not found", "")
+		return
+	}
+
+	// TODO
+	resp := []models.BasicActivityResponse{}
+
+	utils.JSONSuccess(w, resp, "Successfully returned trip")
+}

@@ -6,7 +6,13 @@ import (
 )
 
 type Activity struct {
-	Id               bson.ObjectId   `json:"id" bson:"id"`
+	Id          bson.ObjectId `json:"id" bson:"id"`
+	VendorId    bson.ObjectId `json:"vendorId" bson:"vendorId"`
+	Name        string        `json:"name" bson:"name"`
+	Description string        `json:"description" bson:"description"`
+	// TODO - figure out tripadvisor integration
+	TripAdvisorUrl   string          `json:"tripAdvisorUrl" bson:"trip_advisor_url"`
+	Price            float64         `json:"price" bson:"price"`
 	ThumbnailUrl     string          `json:"thumbnailUrl" bson:"thumbnail_url"`
 	TimePeriod       TimePeriod      `json:"timePeriod" bson:"time_period"`
 	CommittedTripIds []bson.ObjectId `json:"committedTripIds" bson:"committed_trip_ids"`
