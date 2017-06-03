@@ -9,16 +9,15 @@ import (
 )
 
 type Config struct {
-	ApiUrl                string   `json:"apiUrl"`
-	WsUrl                 string   `json:"wsUrl"`
-	DBConnectionUrl       string   `json:"dbConnectionUrl"`
-	DBName                string   `json:"dbName"`
-	GeoLiteMMDBPath       string   `json:"geoLiteMMDBPath"`
-	Home                  string   `json:"home"`
-	Origin                string   `json:"origin"`
-	PreferredLinkProtocol string   `json:"preferredLinkProtocol"`
-	Mode                  string   `json:"mode"`
-	ReservedWSENVIds      []string `json:"reservedWSENVIds"`
+	ApiUrl                string `json:"apiUrl"`
+	WsUrl                 string `json:"wsUrl"`
+	DBConnectionUrl       string `json:"dbConnectionUrl"`
+	DBName                string `json:"dbName"`
+	GeoLiteMMDBPath       string `json:"geoLiteMMDBPath"`
+	Home                  string `json:"home"`
+	Origin                string `json:"origin"`
+	PreferredLinkProtocol string `json:"preferredLinkProtocol"`
+	Mode                  string `json:"mode"`
 }
 
 var Conf Config
