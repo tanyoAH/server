@@ -1,0 +1,9 @@
+{
+  "apiUrl": ":3000",
+  "wsUrl": ":5001",
+  "dbPath": "",
+  "dbName": "tanyo",
+  "home": "localhost:3000",
+  "mode": "debug",
+  "origin": "http://localhost:4000"
+}
