@@ -16,6 +16,13 @@ type Vendor struct {
 	UpdatedAt      time.Time `json:"updatedAt" bson:"updated_at"`
 }
 
+func (vendor *Vendor) Create() error {
+	if !vendor.Id.Valid() {
+		vendor.Id = bson.NewObjectId()
+	}
+	return vendorsC.Insert(vendor)
+}
+
 func (vendor *Vendor) FindById() error {
 	return vendorsC.FindId(vendor.Id).One(vendor)
 }

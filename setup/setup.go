@@ -39,5 +39,16 @@ func insertData() error {
 	if err != nil {
 		return err
 	}
+
+	err = setupVendors()
+	if err != nil {
+		return err
+	}
+
+	err = setupActivities()
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

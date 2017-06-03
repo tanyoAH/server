@@ -14,7 +14,11 @@ type Activity struct {
 	TripAdvisorUrl   string          `json:"tripAdvisorUrl" bson:"trip_advisor_url"`
 	Price            float64         `json:"price" bson:"price"`
 	ThumbnailUrl     string          `json:"thumbnailUrl" bson:"thumbnail_url"`
-	TimePeriod       TimePeriod      `json:"timePeriod" bson:"time_period"`
+	IsEvening        bool            `json:"isEvening" bson:"is_evening"`
+	DurationHours    float64         `json:"durationHours" bson:"duration_hours"`
+	TimePeriod       *TimePeriod     `json:"timePeriod" bson:"time_period"`
+	Location         MgoXY           `json:"location" bson:"location"`
+	Interests        []string        `json:"interests" bson:"interests"`
 	CommittedTripIds []bson.ObjectId `json:"-" bson:"committed_trip_ids"`
 	GroupChat        []ChatMessage   `json:"groupChat,omitempty" bson:"group_chat"`
 	CreatedAt        time.Time       `json:"createdAt" bson:"created_at"`
@@ -70,6 +74,13 @@ func (activity *Activity) UpdateCommitted(tripId bson.ObjectId) error {
 	}
 
 	return nil
+}
+
+func (activity *Activity) Create() error {
+	if !activity.Id.Valid() {
+		activity.Id = bson.NewObjectId()
+	}
+	return activitiesC.Insert(activity)
 }
 
 func GetCommittedActivitiesForTrip(tripId bson.ObjectId) ([]BasicActivityResponse, error) {
