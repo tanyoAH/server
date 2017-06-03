@@ -20,7 +20,12 @@ func V0_CreateTrip(w http.ResponseWriter, r *http.Request) {
 	}
 
 	trip := models.Trip{
-		UserId: user.Id,
+		UserId:         user.Id,
+		LocationName:   reqObj.LocationName,
+		Coordinates:    reqObj.Coordinates,
+		TimePeriod:     reqObj.TimePeriod,
+		ActivityBudget: reqObj.ActivityBudget,
+		MaxDistance:    reqObj.MaxDistance,
 	}
 	err = trip.Create()
 	if err != nil {

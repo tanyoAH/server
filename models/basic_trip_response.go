@@ -1,6 +1,8 @@
 package models
 
-import "gopkg.in/mgo.v2/bson"
+import (
+	"gopkg.in/mgo.v2/bson"
+)
 
 type BasicTripResponse struct {
 	Id             bson.ObjectId `json:"id" bson:"_id"`
