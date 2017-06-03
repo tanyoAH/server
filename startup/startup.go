@@ -6,9 +6,9 @@ import (
 	"github.com/tanyoAH/tanyo-server/config"
 	"github.com/tanyoAH/tanyo-server/controllers"
 	// Import xwsenv for it's init routine that's relied upon for startup
-	_ "github.com/tanyoAH/tanyo-server/twsproto"
 	"github.com/gorilla/handlers"
 	"github.com/tanyoAH/tanyo-server/models" /* MySQL */
+	_ "github.com/tanyoAH/tanyo-server/twsproto"
 	"os"
 
 	"github.com/tanyoAH/tanyo-server/tws"

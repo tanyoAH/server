@@ -5,7 +5,9 @@ import "gopkg.in/mgo.v2/bson"
 type BasicUserResponse struct {
 	Id         bson.ObjectId `json:"id"`
 	FullName   string        `json:"fullName"`
+	Headline   string        `json:"headline"`
 	ProfileUrl string        `json:"profileUrl"`
+	From       string        `json:"from"`
 }
 
 func GetBasicUserResponsesFromIdArray(ids []bson.ObjectId) ([]BasicUserResponse, error) {

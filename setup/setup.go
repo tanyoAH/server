@@ -27,5 +27,17 @@ func StartSetup(resetDatabase bool) {
 		Log.Info("Finished resetting database")
 	}
 
+	err = insertData()
+	if err != nil {
+		Log.WithField("error", err).Fatal("Couldn't insert data into database")
+	}
 	Log.Infof("Finished setting up database")
+}
+
+func insertData() error {
+	err := setupUsers()
+	if err != nil {
+		return err
+	}
+	return nil
 }
