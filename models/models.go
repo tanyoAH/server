@@ -33,6 +33,5 @@ func Setup() error {
 }
 
 func WipeDatabase() error {
-	// TODO
-	return nil
+	return db.DropDatabase()
 }
