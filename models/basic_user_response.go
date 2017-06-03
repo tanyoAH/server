@@ -8,6 +8,7 @@ type BasicUserResponse struct {
 	Headline   string        `json:"headline"`
 	ProfileUrl string        `json:"profileUrl"`
 	From       string        `json:"from"`
+	Age        int64         `json:"age"`
 }
 
 func GetBasicUserResponsesFromIdArray(ids []bson.ObjectId) ([]BasicUserResponse, error) {
