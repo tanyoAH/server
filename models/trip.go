@@ -6,7 +6,7 @@ import (
 )
 
 type Trip struct {
-	Id             bson.ObjectId `json:"id" bson:"id"`
+	Id             bson.ObjectId `json:"id" bson:"_id"`
 	UserId         bson.ObjectId `json:"-" bson:"user_id"`
 	LocationName   string        `json:"locationName" bson:"locationName"`
 	Coordinates    MgoXY         `json:"coordinates" bson:"coordinates"`
@@ -63,4 +63,17 @@ func (trip *Trip) GetDetailedResponse() (*DetailedTripResponse, error) {
 		User:       *u.ConvertToBasicUserResponse(),
 		Activities: activities,
 	}, nil
+}
+
+func GetUserIdsFromTripIdsArray(ids []bson.ObjectId) ([]bson.ObjectId, error) {
+	trips := []Trip{}
+	err := tripsC.Find(bson.M{"_id": bson.M{"$in": ids}}).All(&trips)
+	if err != nil {
+		return nil, err
+	}
+	resp := make([]bson.ObjectId, len(trips))
+	for ind := range trips {
+		resp[ind] = trips[ind].UserId
+	}
+	return resp, nil
 }

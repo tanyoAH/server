@@ -6,8 +6,8 @@ import (
 )
 
 type Activity struct {
-	Id          bson.ObjectId `json:"id" bson:"id"`
-	VendorId    bson.ObjectId `json:"vendorId" bson:"vendorId"`
+	Id          bson.ObjectId `json:"id" bson:"_id"`
+	VendorId    bson.ObjectId `json:"-" bson:"vendorId"`
 	Name        string        `json:"name" bson:"name"`
 	Description string        `json:"description" bson:"description"`
 	// TODO - figure out tripadvisor integration
@@ -15,10 +15,61 @@ type Activity struct {
 	Price            float64         `json:"price" bson:"price"`
 	ThumbnailUrl     string          `json:"thumbnailUrl" bson:"thumbnail_url"`
 	TimePeriod       TimePeriod      `json:"timePeriod" bson:"time_period"`
-	CommittedTripIds []bson.ObjectId `json:"committedTripIds" bson:"committed_trip_ids"`
-	GroupChat        []ChatMessage   `json:"groupChat" bson:"group_chat"`
+	CommittedTripIds []bson.ObjectId `json:"-" bson:"committed_trip_ids"`
+	GroupChat        []ChatMessage   `json:"groupChat,omitempty" bson:"group_chat"`
 	CreatedAt        time.Time       `json:"createdAt" bson:"created_at"`
 	UpdatedAt        time.Time       `json:"updatedAt" bson:"updated_at"`
+}
+
+func (activity *Activity) updateTS() {
+	activity.UpdatedAt = time.Now()
+}
+
+func (activity *Activity) GetDetailedResponse(userId, tripId bson.ObjectId) (*DetailedActivityResponse, error) {
+	// TODO
+	err := activitiesC.FindId(activity.Id).One(activity)
+	if err != nil {
+		return nil, err
+	}
+	resp := DetailedActivityResponse{Activity: *activity}
+	for _, tId := range resp.CommittedTripIds {
+		if tId == tripId {
+			resp.IsCommitted = true
+			break
+		}
+	}
+	if resp.IsCommitted {
+		userIds, err := GetUserIdsFromTripIdsArray(resp.CommittedTripIds)
+		if err != nil {
+			return nil, err
+		}
+		resp.CommittedUsers, err = GetBasicUserResponsesFromIdArray(userIds)
+		if err != nil {
+			return nil, err
+		}
+		return &resp, nil
+	}
+	resp.GroupChat = nil
+	return &resp, nil
+}
+
+func (activity *Activity) FindById() error {
+	return activitiesC.FindId(activity.Id).One(activity)
+}
+
+func (activity *Activity) UpdateCommitted(tripId bson.ObjectId) error {
+	err := activity.FindById()
+	if err != nil {
+		return err
+	}
+	activity.updateTS()
+	activity.CommittedTripIds = append([]bson.ObjectId{tripId}, activity.CommittedTripIds...)
+	err = activitiesC.UpdateId(activity.Id, bson.M{"$set": bson.M{"committed_trip_ids": activity.CommittedTripIds, "updated_at": activity.UpdatedAt}})
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func GetCommittedActivitiesForTrip(tripId bson.ObjectId) ([]BasicActivityResponse, error) {

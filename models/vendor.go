@@ -6,7 +6,7 @@ import (
 )
 
 type Vendor struct {
-	Id          bson.ObjectId `json:"id" bson:"id"`
+	Id          bson.ObjectId `json:"id" bson:"_id"`
 	Name        string        `json:"name" bson:"name"`
 	Description string        `json:"description" bson:"description"`
 	// TODO - figure out tripadvisor integration
@@ -14,4 +14,8 @@ type Vendor struct {
 	ThumbnailUrl   string    `json:"thumbnailUrl" bson:"thumbnail_url"`
 	CreatedAt      time.Time `json:"createdAt" bson:"created_at"`
 	UpdatedAt      time.Time `json:"updatedAt" bson:"updated_at"`
+}
+
+func (vendor *Vendor) FindById() error {
+	return vendorsC.FindId(vendor.Id).One(vendor)
 }

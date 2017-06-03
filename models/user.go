@@ -3,7 +3,7 @@ package models
 import "gopkg.in/mgo.v2/bson"
 
 type User struct {
-	Id          bson.ObjectId `json:"id" bson:"id"`
+	Id          bson.ObjectId `json:"id" bson:"_id"`
 	AccessToken string        `json:"-" bson:"access_token"`
 	FullName    string        `json:"fullName" bson:"full_name"`
 	ProfileUrl  string        `json:"profileUrl" bson:"profile_url"`
