@@ -23,7 +23,13 @@ func GetMyTrips(userId bson.ObjectId) ([]BasicTripResponse, error) {
 func TripsToBasicTripResponse(rawTrips []Trip) []BasicTripResponse {
 	trips := make([]BasicTripResponse, len(rawTrips))
 	for ind, rt := range rawTrips {
-		rawTrips[ind] = rt
+		trips[ind] = BasicTripResponse{
+			Id:             rt.Id,
+			LocationName:   rt.LocationName,
+			TimePeriod:     rt.TimePeriod,
+			ActivityBudget: rt.ActivityBudget,
+			MaxDistance:    rt.MaxDistance,
+		}
 	}
 	return trips
 }
