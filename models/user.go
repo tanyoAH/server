@@ -16,6 +16,9 @@ type User struct {
 }
 
 func (user *User) Create() error {
+	if !user.Id.Valid() {
+		user.Id = bson.NewObjectId()
+	}
 	return usersC.Insert(user)
 }
 
