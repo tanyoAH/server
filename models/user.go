@@ -34,6 +34,8 @@ func (user *User) ConvertToBasicUserResponse() *BasicUserResponse {
 	return &BasicUserResponse{
 		Id:         user.Id,
 		FullName:   user.FullName,
+		Headline:   user.Headline,
 		ProfileUrl: user.ProfileUrl,
+		From:       user.From,
 	}
 }

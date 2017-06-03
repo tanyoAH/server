@@ -53,22 +53,6 @@ func V0_GetTrip(w http.ResponseWriter, r *http.Request) {
 	utils.JSONSuccess(w, resp, "Successfully returned trip")
 }
 
-func V0_GetMyTrips(w http.ResponseWriter, r *http.Request) {
-	user, err := context.GetCurrentUser(r)
-	if err != nil {
-		utils.JSONForbiddenError(w, "Invalid user", "")
-		return
-	}
-
-	resp, err := models.GetMyTrips(user.Id)
-	if err != nil {
-		utils.JSONNotFoundError(w, "Trip not found", "")
-		return
-	}
-
-	utils.JSONSuccess(w, resp, "Successfully returned trip")
-}
-
 func V0_GetActivityRecommendationsForTrip(w http.ResponseWriter, r *http.Request) {
 	tripId := utils.GetMuxPathIds(r)["tripId"]
 	if !tripId.Valid() {
