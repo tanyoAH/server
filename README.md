@@ -1,3 +1,3 @@
 # Tanyo Server
 
-## This server helps our users __discover their next adventure, together__.
+## This server helps our users _discover their next adventure, together_.
