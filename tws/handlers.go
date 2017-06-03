@@ -2,18 +2,18 @@ package tws
 
 import "github.com/tanyoAH/tanyo-server/twsproto"
 
-type WSENVHandler func(*Session, *twsproto.Request)
+type TWSHandler func(*Session, *twsproto.Request)
 
-type WSENVNotificationHandler func(*Session, *twsproto.Notification)
+type TWSNotificationHandler func(*Session, *twsproto.Notification)
 
-type WSENVNotificationHandlers map[string]WSENVNotificationHandler
+type TWSVNotificationHandlers map[string]TWSNotificationHandler
 
-type WSENVHandlers map[string]WSENVHandler
+type TWSHandlers map[string]TWSHandler
 
-var handlers WSENVHandlers = map[string]WSENVHandler{
+var handlers TWSHandlers = map[string]TWSHandler{
 // TODO
 }
 
-var notificationHandlers WSENVNotificationHandlers = map[string]WSENVNotificationHandler{
+var notificationHandlers TWSVNotificationHandlers = map[string]TWSNotificationHandler{
 // TODO handle inbound notifications
 }

@@ -1,0 +1,70 @@
+package api
+
+import (
+	"github.com/tanyoAH/tanyo-server/context"
+	"github.com/tanyoAH/tanyo-server/models"
+	"github.com/tanyoAH/tanyo-server/utils"
+	"net/http"
+)
+
+func V0_CreateTrip(w http.ResponseWriter, r *http.Request) {
+	user, err := context.GetCurrentUserAndCatchForAPI(w, r)
+	if err != nil {
+		return
+	}
+
+	reqObj := models.CreateTripRequest{}
+	err = utils.JSONDecodeAndCatchForAPI(w, r, &reqObj)
+	if err != nil {
+		return
+	}
+
+	trip := models.Trip{
+		UserId: user.Id,
+	}
+	err = trip.Create()
+	if err != nil {
+		utils.JSONInternalError(w, "Failed to create trip", "")
+		return
+	}
+	resp, err := trip.GetDetailedResponse()
+	if err != nil {
+		utils.JSONInternalError(w, "Failed to create trip", "")
+		return
+	}
+
+	utils.JSONSuccess(w, resp, "Successfully created trip")
+}
+
+func V0_GetTrip(w http.ResponseWriter, r *http.Request) {
+	tripId := utils.GetMuxPathIds(r)["tripId"]
+	if !tripId.Valid() {
+		utils.JSONBadRequestError(w, "Invalid trip id", "")
+		return
+	}
+
+	trip := models.Trip{Id: tripId}
+	resp, err := trip.GetDetailedResponse()
+	if err != nil {
+		utils.JSONNotFoundError(w, "Trip not found", "")
+		return
+	}
+
+	utils.JSONSuccess(w, resp, "Successfully returned trip")
+}
+
+func V0_GetMyTrips(w http.ResponseWriter, r *http.Request) {
+	user, err := context.GetCurrentUser(r)
+	if err != nil {
+		utils.JSONForbiddenError(w, "Invalid user", "")
+		return
+	}
+
+	resp, err := models.GetMyTrips(user.Id)
+	if err != nil {
+		utils.JSONNotFoundError(w, "Trip not found", "")
+		return
+	}
+
+	utils.JSONSuccess(w, resp, "Successfully returned trip")
+}

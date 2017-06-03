@@ -6,9 +6,20 @@ import (
 )
 
 type Activity struct {
+	Id               bson.ObjectId   `json:"id" bson:"id"`
+	ThumbnailUrl     string          `json:"thumbnailUrl" bson:"thumbnail_url"`
 	TimePeriod       TimePeriod      `json:"timePeriod" bson:"time_period"`
-	CommittedUserIds []bson.ObjectId `json:"committedUserIds" bson:"committed_user_ids"`
+	CommittedTripIds []bson.ObjectId `json:"committedTripIds" bson:"committed_trip_ids"`
 	GroupChat        []ChatMessage   `json:"groupChat" bson:"group_chat"`
 	CreatedAt        time.Time       `json:"createdAt" bson:"created_at"`
 	UpdatedAt        time.Time       `json:"updatedAt" bson:"updated_at"`
+}
+
+func GetCommittedActivitiesForTrip(tripId bson.ObjectId) ([]BasicActivityResponse, error) {
+	respArr := []BasicActivityResponse{}
+	err := activitiesC.Find(bson.M{"committed_trip_ids": bson.M{"$elemMatch": bson.M{"$eq": tripId}}}).All(&respArr)
+	if err != nil {
+		return nil, err
+	}
+	return respArr, nil
 }

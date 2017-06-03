@@ -3,6 +3,6 @@ package models
 import "time"
 
 type TimePeriod struct {
-	Start time.Time `json:"start" bson:"start"`
-	End   time.Time `json:"end" bson:"end"`
+	Start time.Time `json:"start" bson:"start" valid:"required"`
+	End   time.Time `json:"end" bson:"end" valid:"required"`
 }

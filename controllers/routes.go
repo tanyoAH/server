@@ -14,6 +14,10 @@ func CreateRouter() http.Handler {
 
 	apiV0Router := router.PathPrefix("/api/v0").Subrouter()
 	apiV0Router.HandleFunc("/", Use(api.V0_API, RequireUserForAPI)).Methods("GET")
+	apiV0Router.HandleFunc("/me/trips", Use(api.V0_GetMyTrips, RequireUserForAPI)).Methods("GET")
+
+	apiV0Router.HandleFunc("/trips", Use(api.V0_CreateTrip, RequireUserForAPI)).Methods("POST")
+	apiV0Router.HandleFunc("/trips/{tripId}", Use(api.V0_GetTrip, RequireUserForAPI)).Methods("GET")
 
 	marketingSiteFS := http.StripPrefix("/static/", http.FileServer(http.Dir("./static/")))
 	router.PathPrefix("/static/").Handler(marketingSiteFS).Methods("GET")

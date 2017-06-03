@@ -14,3 +14,15 @@ type User struct {
 func (user *User) FindByAccessToken() error {
 	return usersC.Find(bson.M{"access_token": user.AccessToken}).One(user)
 }
+
+func (user *User) FindById() error {
+	return usersC.FindId(user.Id).One(user)
+}
+
+func (user *User) ConvertToBasicUserResponse() *BasicUserResponse {
+	return &BasicUserResponse{
+		Id:         user.Id,
+		FullName:   user.FullName,
+		ProfileUrl: user.ProfileUrl,
+	}
+}
