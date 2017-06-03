@@ -4,6 +4,7 @@ import "github.com/tanyoAH/tanyo-server/models"
 
 func setupUsers() error {
 	kimA := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/4618/man-person-hat-fur.jpg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_kim_a",
 		FullName:           "Kim A.",
 		Headline:           "Young Entrepreneur",
@@ -18,6 +19,7 @@ func setupUsers() error {
 	}
 
 	victorB := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/127229/pexels-photo-127229.jpeg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_victor_b",
 		FullName:           "Victor B.",
 		Headline:           "Movie Director",
@@ -32,6 +34,7 @@ func setupUsers() error {
 	}
 
 	lucyC := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/216983/pexels-photo-216983.jpeg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_lucy_c",
 		FullName:           "Lucy C.",
 		Headline:           "Fashion Model",
@@ -46,6 +49,7 @@ func setupUsers() error {
 	}
 
 	florenceD := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/274595/pexels-photo-274595.jpeg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_florence_d",
 		FullName:           "Florence D.",
 		Headline:           "Doctor",
@@ -60,6 +64,7 @@ func setupUsers() error {
 	}
 
 	kellyE := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/218721/pexels-photo-218721.jpeg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_kelly_e",
 		FullName:           "Kelly E.",
 		Headline:           "World Traveler",
@@ -74,6 +79,7 @@ func setupUsers() error {
 	}
 
 	jerryF := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/301958/pexels-photo-301958.jpeg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_jerry_f",
 		FullName:           "Jerry F.",
 		Headline:           "Ballet Dancer",
@@ -88,6 +94,7 @@ func setupUsers() error {
 	}
 
 	paulG := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/65109/pexels-photo-65109.jpeg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_paul_g",
 		FullName:           "Paul G.",
 		Headline:           "Weird Scientist",
@@ -102,6 +109,7 @@ func setupUsers() error {
 	}
 
 	stephenH := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/403936/pexels-photo-403936.jpeg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_stephen_h",
 		FullName:           "Stephen H.",
 		Headline:           "Handsome Dude",
@@ -116,6 +124,7 @@ func setupUsers() error {
 	}
 
 	daisyI := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/253758/pexels-photo-253758.jpeg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_daisy_i",
 		FullName:           "Daisy I.",
 		Headline:           "Opera Singer",
@@ -130,6 +139,7 @@ func setupUsers() error {
 	}
 
 	robertJ := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/4618/man-person-hat-fur.jpg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_robert_j",
 		FullName:           "Robert J.",
 		Headline:           "Artist",
@@ -144,6 +154,7 @@ func setupUsers() error {
 	}
 
 	seanK := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/269334/pexels-photo-269334.jpeg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_sean_k",
 		FullName:           "Sean K.",
 		Headline:           "Jazz Guitarist",
@@ -158,6 +169,7 @@ func setupUsers() error {
 	}
 
 	katieL := models.User{
+		ProfileUrl:         "https://images.pexels.com/photos/37533/studio-portrait-woman-face-37533.jpeg?h=350&auto=compress&cs=tinysrgb",
 		AccessToken:        "at_katie_l",
 		FullName:           "Katie L.",
 		Headline:           "Professor",
