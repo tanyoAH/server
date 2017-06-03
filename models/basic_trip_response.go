@@ -12,7 +12,7 @@ type BasicTripResponse struct {
 
 func GetMyTrips(userId bson.ObjectId) ([]BasicTripResponse, error) {
 	rawTrips := []Trip{}
-	err := tripsC.Find(bson.M{"user_id": userId}).All(rawTrips)
+	err := tripsC.Find(bson.M{"user_id": userId}).All(&rawTrips)
 	if err != nil {
 		return nil, err
 	}
