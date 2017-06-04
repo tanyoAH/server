@@ -16,7 +16,7 @@ func setupActivities() error {
 		Price:          95,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        false,
 		DurationHours:    2.5,
@@ -29,8 +29,6 @@ func setupActivities() error {
 		return err
 	}
 
-
-
 	atvPlusZipline := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933332c71d675aff38c53b7"),
 		Name:           "Cancun Combo Tour: ATV and Zipline with Cenote Swim",
@@ -40,7 +38,7 @@ func setupActivities() error {
 		Price:          143,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        false,
 		DurationHours:    4,
@@ -48,12 +46,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := atvPlusZipline.Create()
+	err = atvPlusZipline.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	swimWithWhaleSharks := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933333771d675aff38c53b8"),
@@ -64,7 +60,7 @@ func setupActivities() error {
 		Price:          175,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        false,
 		DurationHours:    2,
@@ -72,12 +68,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := swimWithWhaleSharks.Create()
+	err = swimWithWhaleSharks.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	tulumCave := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933334171d675aff38c53b9"),
@@ -88,7 +82,7 @@ func setupActivities() error {
 		Price:          143,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        false,
 		DurationHours:    5,
@@ -96,12 +90,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := tulumCave.Create()
+	err = tulumCave.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	reefShipwreck := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933334a71d675aff38c53ba"),
@@ -112,7 +104,7 @@ func setupActivities() error {
 		Price:          57,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        false,
 		DurationHours:    2,
@@ -120,12 +112,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := reefShipwreck.Create()
+	err = reefShipwreck.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	comboTour := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933335271d675aff38c53bb"),
@@ -136,7 +126,7 @@ func setupActivities() error {
 		Price:          116,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        false,
 		DurationHours:    7,
@@ -144,12 +134,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := comboTour.Create()
+	err = comboTour.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	earlyAccess := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933335a71d675aff38c53bc"),
@@ -160,7 +148,7 @@ func setupActivities() error {
 		Price:          28,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        false,
 		DurationHours:    6,
@@ -168,12 +156,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := earlyAccess.Create()
+	err = earlyAccess.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	islaContoy := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933332c71d675aff38c53b7"),
@@ -184,7 +170,7 @@ func setupActivities() error {
 		Price:          105,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        false,
 		DurationHours:    2,
@@ -192,12 +178,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := islaContoy.Create()
+	err = islaContoy.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	hookDinner := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933332c71d675aff38c53b7"),
@@ -208,7 +192,7 @@ func setupActivities() error {
 		Price:          47,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        true,
 		DurationHours:    3,
@@ -216,12 +200,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := hookDinner.Create()
+	err = hookDinner.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	chichenItza := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933332c71d675aff38c53b7"),
@@ -232,7 +214,7 @@ func setupActivities() error {
 		Price:          74,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        false,
 		DurationHours:    4,
@@ -240,12 +222,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := chichenItza.Create()
+	err = chichenItza.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	islasTour := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933332c71d675aff38c53b7"),
@@ -256,7 +236,7 @@ func setupActivities() error {
 		Price:          116,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        false,
 		DurationHours:    6,
@@ -264,12 +244,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := islasTour.Create()
+	err = islasTour.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	islaSailing := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933336371d675aff38c53bd"),
@@ -280,7 +258,7 @@ func setupActivities() error {
 		Price:          79,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        false,
 		DurationHours:    7,
@@ -288,12 +266,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := islaSailing.Create()
+	err = islaSailing.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	romanticDinner := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933336e71d675aff38c53be"),
@@ -304,7 +280,7 @@ func setupActivities() error {
 		Price:          94,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        true,
 		DurationHours:    3,
@@ -312,12 +288,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := romanticDinner.Create()
+	err = romanticDinner.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	lobsterDinnerCruise := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933337671d675aff38c53bf"),
@@ -328,7 +302,7 @@ func setupActivities() error {
 		Price:          94,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        true,
 		DurationHours:    3,
@@ -336,12 +310,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := lobsterDinnerCruise.Create()
+	err = lobsterDinnerCruise.Create()
 	if err != nil {
 		return err
 	}
-
-
 
 	jollyRodger := models.Activity{
 		VendorId:       bson.ObjectIdHex("5933337e71d675aff38c53c0"),
@@ -352,7 +324,7 @@ func setupActivities() error {
 		Price:          101,
 		Location: models.MgoXY{
 			X: 21.099722,
-			Y:  -86.765110,
+			Y: -86.765110,
 		},
 		IsEvening:        true,
 		DurationHours:    3.5,
@@ -360,13 +332,10 @@ func setupActivities() error {
 		CommittedTripIds: []bson.ObjectId{},
 		GroupChat:        []models.ChatMessage{},
 	}
-	err := jollyRodger.Create()
+	err = jollyRodger.Create()
 	if err != nil {
 		return err
 	}
-        
-        
-
 
 	return nil
 }

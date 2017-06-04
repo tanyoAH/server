@@ -121,6 +121,9 @@ func GetCommittedActivitiesForTrip(tripId bson.ObjectId) ([]BasicActivityRespons
 	if err != nil {
 		return nil, err
 	}
+	for ind := range respArr {
+		respArr[ind].Format()
+	}
 	return respArr, nil
 }
 
@@ -129,6 +132,9 @@ func GetRecommendedActivitiesForTrip(user User, trip Trip) ([]BasicActivityRespo
 	err := activitiesC.Find(bson.M{"interests": bson.M{"$elemMatch": bson.M{"$in": user.Interests}}}).All(&respArr)
 	if err != nil {
 		return nil, err
+	}
+	for ind := range respArr {
+		respArr[ind].Format()
 	}
 	return respArr, nil
 }
