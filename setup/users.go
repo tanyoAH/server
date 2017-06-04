@@ -11,7 +11,7 @@ func setupUsers() error {
 		Age:                23,
 		TravelledCountries: []string{"Vietnam", "Singapore", "Japan"},
 		From:               "Philippines",
-		Interests:          []string{"Painting", "Sculpting", "Surfing"},
+		Interests:          []string{"Painting", "Extreme Sports", "Surfing"},
 	}
 	err := kimA.Create()
 	if err != nil {
