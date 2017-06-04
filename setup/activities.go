@@ -7,7 +7,7 @@ import (
 
 func setupActivities() error {
 	colombusLobster := models.Activity{
-		VendorId:       bson.ObjectId("593332f371d675aff38c53b6"),
+		VendorId:       bson.ObjectIdHex("593332f371d675aff38c53b6"),
 		Name:           "Columbus Lobster Dinner Cruise in Cancun",
 		Description:    "2.5-hour dinner cruise in Cancun",
 		TripAdvisorUrl: "https://en.tripadvisor.com.hk/AttractionProductDetail?product=3911P70&d=5432465&aidSuffix=tvrm&partner=Viator",
@@ -29,7 +29,7 @@ func setupActivities() error {
 	}
 
 	atvPlusZipline := models.Activity{
-		VendorId:       bson.ObjectId("5933332c71d675aff38c53b7"),
+		VendorId:       bson.ObjectIdHex("5933332c71d675aff38c53b7"),
 		Name:           "Cancun Combo Tour: ATV and Zipline with Cenote Swim",
 		Description:    "Half-day zipline and ATV combo tour",
 		TripAdvisorUrl: "https://en.tripadvisor.com.hk/AttractionProductDetail?product=3206CUNATVZIP&d=150807&aidSuffix=xsell&partner=Viator",
@@ -51,7 +51,7 @@ func setupActivities() error {
 	}
 
 	swimWithWhaleSharks := models.Activity{
-		VendorId:       bson.ObjectId("5933333771d675aff38c53b8"),
+		VendorId:       bson.ObjectIdHex("5933333771d675aff38c53b8"),
 		Name:           "Swim with Whale Sharks in Cancun: Small-Group Snorkeling Tour",
 		Description:    "Whale shark snorkeling adventure off the coast of Cancun",
 		TripAdvisorUrl: "https://en.tripadvisor.com.hk/AttractionProductDetail?product=3467WHALE&d=150807&aidSuffix=xsell&partner=Viator",
