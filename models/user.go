@@ -40,3 +40,9 @@ func (user *User) ConvertToBasicUserResponse() *BasicUserResponse {
 		Age:        user.Age,
 	}
 }
+
+func GetAllUsers() ([]User, error) {
+	users := []User{}
+	err := usersC.Find(bson.M{}).All(&users)
+	return users, err
+}

@@ -7,8 +7,8 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	"github.com/tanyoAH/tanyo-server/config"
-	"github.com/tanyoAH/tanyo-server/context"
 	"github.com/tanyoAH/tanyo-server/middleware"
+	"github.com/tanyoAH/tanyo-server/models"
 	"github.com/tanyoAH/tanyo-server/twsproto"
 	"github.com/tanyoAH/tanyo-server/utils"
 	"sync"
@@ -73,7 +73,7 @@ func (state *State) CreateRouter() http.Handler {
 	router := mux.NewRouter()
 	router = router.StrictSlash(true)
 
-	router.HandleFunc("/v0/ws", serveWS_V0(state)).Methods("GET")
+	router.HandleFunc("/v0/ws/{userId}", serveWS_V0(state)).Methods("GET")
 
 	return middleware.Use(router.ServeHTTP, middleware.GetContext, middleware.RecoverAndLog)
 }
@@ -100,7 +100,8 @@ func (state *State) NotifyUsers(ids []string, event string, data interface{}) {
 
 func serveWS_V0(se *State) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		user, err := context.GetCurrentUser(r)
+		user := models.User{AccessToken: mux.Vars(r)["userId"]}
+		err := user.FindByAccessToken()
 		if err != nil {
 			utils.JSONForbiddenError(w, "Invalid user", "")
 			return
@@ -108,6 +109,7 @@ func serveWS_V0(se *State) func(w http.ResponseWriter, r *http.Request) {
 
 		conn, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
+			utils.JSONForbiddenError(w, "Upgrade error", "")
 			return
 		}
 		sess := Session{
