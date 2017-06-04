@@ -47,6 +47,11 @@ func insertData() error {
 		return err
 	}
 
+	err = setupTrips()
+	if err != nil {
+		Log.Error("Error inserting trips")
+	}
+
 	err = setupActivities()
 	if err != nil {
 		Log.Error("Error inserting activities")
