@@ -11,7 +11,7 @@ type TWSVNotificationHandlers map[string]TWSNotificationHandler
 type TWSHandlers map[string]TWSHandler
 
 var handlers TWSHandlers = map[string]TWSHandler{
-// TODO
+	"activity.chat": chatHandler,
 }
 
 var notificationHandlers TWSVNotificationHandlers = map[string]TWSNotificationHandler{

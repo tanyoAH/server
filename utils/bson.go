@@ -13,3 +13,11 @@ func GetBSONObjectId(id string) (bson.ObjectId, error) {
 	}
 	return bson.ObjectIdHex(id), nil
 }
+
+func BSONObjectArrayToStringArray(arr []bson.ObjectId) []string {
+	resp := make([]string, len(arr))
+	for ind := range arr {
+		resp[ind] = arr[ind].String()
+	}
+	return resp
+}

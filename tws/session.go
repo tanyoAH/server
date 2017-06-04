@@ -3,6 +3,7 @@ package tws
 import (
 	"encoding/json"
 	"github.com/gorilla/websocket"
+	"github.com/tanyoAH/tanyo-server/models"
 	"github.com/tanyoAH/tanyo-server/twsproto"
 	"net/http"
 	"time"
@@ -12,12 +13,13 @@ type Session struct {
 	IsClosed     bool
 	connection   *websocket.Conn
 	WriteChannel chan twsproto.MessageWrapper
-	WSENV        *State
+	State        *State
+	User         models.User
 }
 
 func (sess *Session) Initialize(conn *websocket.Conn, s *State) {
 	sess.connection = conn
-	sess.WSENV = s
+	sess.State = s
 	sess.WriteChannel = make(chan twsproto.MessageWrapper)
 }
 

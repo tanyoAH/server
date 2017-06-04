@@ -9,6 +9,7 @@ import (
 	"github.com/tanyoAH/tanyo-server/config"
 	"github.com/tanyoAH/tanyo-server/context"
 	"github.com/tanyoAH/tanyo-server/middleware"
+	"github.com/tanyoAH/tanyo-server/twsproto"
 	"github.com/tanyoAH/tanyo-server/utils"
 	"sync"
 )
@@ -87,6 +88,16 @@ func (state *State) DropSession(userId string) {
 	delete(state.activeUsers, userId)
 }
 
+func (state *State) NotifyUsers(ids []string, event string, data interface{}) {
+	for _, id := range ids {
+		state.activeUsersMutex.Lock()
+		if s, ok := state.activeUsers[id]; ok {
+			twsproto.SendNotification(s.WriteChannel, event, data)
+		}
+		state.activeUsersMutex.Unlock()
+	}
+}
+
 func serveWS_V0(se *State) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		user, err := context.GetCurrentUser(r)
@@ -99,7 +110,9 @@ func serveWS_V0(se *State) func(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			return
 		}
-		sess := Session{}
+		sess := Session{
+			User: user,
+		}
 		sess.Initialize(conn, se)
 		go sess.Writer()
 		se.AddSession(user.Id.String(), &sess)
