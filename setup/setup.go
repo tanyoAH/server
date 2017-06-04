@@ -37,16 +37,19 @@ func StartSetup(resetDatabase bool) {
 func insertData() error {
 	err := setupUsers()
 	if err != nil {
+		Log.Error("Error inserting users")
 		return err
 	}
 
 	err = setupVendors()
 	if err != nil {
+		Log.Error("Error inserting vendors")
 		return err
 	}
 
 	err = setupActivities()
 	if err != nil {
+		Log.Error("Error inserting activities")
 		return err
 	}
 
