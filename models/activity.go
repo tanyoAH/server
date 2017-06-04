@@ -76,6 +76,21 @@ func (activity *Activity) UpdateCommitted(tripId bson.ObjectId) error {
 	return nil
 }
 
+func (activity *Activity) AddChatMessage(basicUser BasicUserResponse, text string) error {
+	err := activity.FindById()
+	if err != nil {
+		return err
+	}
+	activity.updateTS()
+	activity.GroupChat = append([]ChatMessage{{User: basicUser, Text: text, CreatedAt: time.Now()}}, activity.GroupChat...)
+	err = activitiesC.UpdateId(activity.Id, bson.M{"$set": bson.M{"group_chat": activity.GroupChat, "updated_at": activity.UpdatedAt}})
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (activity *Activity) Create() error {
 	if !activity.Id.Valid() {
 		activity.Id = bson.NewObjectId()

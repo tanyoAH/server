@@ -18,7 +18,7 @@ var Log = config.Conf.GetLogger()
 
 var CorsHandler = handlers.CORS(handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"}), handlers.AllowCredentials(), handlers.AllowedHeaders([]string{"content-type"}), handlers.AllowedOrigins([]string{config.Conf.Home, config.Conf.Origin}))
 
-func StartServer(withTWS bool) {
+func StartServer() {
 	Log.Info("Server Loaded")
 
 	err := models.Setup()
@@ -26,20 +26,18 @@ func StartServer(withTWS bool) {
 		Log.WithField("error", err).Fatal("Couldn't setup models")
 	}
 
-	if withTWS {
-		Log.Info("Initializing WSENV environment(s)")
-		ws, err := tws.CreateAndSetupNewState()
-		if err != nil {
-			Log.WithField("error", err).Fatal("Couldn't setup WSENV Eevironment(s)")
-		}
-		go startTWSServer(ws)
+	Log.Info("Initializing WS environment(s)")
+	ws, err := tws.CreateAndSetupNewState()
+	if err != nil {
+		Log.WithField("error", err).Fatal("Couldn't setup WS Eevironment(s)")
 	}
+	go startTWSServer(ws)
 
 	Log.WithField("hostname", config.Conf.ApiUrl).Info("API Server starting")
 	if config.Conf.IsDebugMode() {
-		http.ListenAndServe(config.Conf.ApiUrl, CorsHandler(handlers.CombinedLoggingHandler(os.Stdout, controllers.CreateRouter())))
+		http.ListenAndServe(config.Conf.ApiUrl, CorsHandler(handlers.CombinedLoggingHandler(os.Stdout, controllers.CreateRouter(ws))))
 	} else {
-		http.ListenAndServe(config.Conf.ApiUrl, handlers.CombinedLoggingHandler(os.Stdout, controllers.CreateRouter()))
+		http.ListenAndServe(config.Conf.ApiUrl, handlers.CombinedLoggingHandler(os.Stdout, controllers.CreateRouter(ws)))
 	}
 }
 

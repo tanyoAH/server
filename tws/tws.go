@@ -7,7 +7,10 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	"github.com/tanyoAH/tanyo-server/config"
-	"github.com/tanyoAH/tanyo-server/controllers"
+	"github.com/tanyoAH/tanyo-server/context"
+	"github.com/tanyoAH/tanyo-server/middleware"
+	"github.com/tanyoAH/tanyo-server/utils"
+	"sync"
 )
 
 var Log = config.Conf.GetLogger()
@@ -53,26 +56,45 @@ func init() {
 }
 
 type State struct {
-	// TODO
+	activeUsersMutex *sync.Mutex
+	activeUsers      map[string]*Session
 }
 
 func CreateAndSetupNewState() (*State, error) {
-	state := State{}
-	// TODO setup state
+	state := State{
+		activeUsersMutex: &sync.Mutex{},
+		activeUsers:      map[string]*Session{},
+	}
 	return &state, nil
 }
 
-func (se *State) CreateRouter() http.Handler {
+func (state *State) CreateRouter() http.Handler {
 	router := mux.NewRouter()
 	router = router.StrictSlash(true)
 
-	router.HandleFunc("/v0/ws", serveWSENV_V0(se)).Methods("GET")
+	router.HandleFunc("/v0/ws", serveWS_V0(state)).Methods("GET")
 
-	return controllers.Use(router.ServeHTTP, controllers.GetContext, controllers.RecoverAndLog)
+	return middleware.Use(router.ServeHTTP, middleware.GetContext, middleware.RecoverAndLog)
 }
 
-func serveWSENV_V0(se *State) func(w http.ResponseWriter, r *http.Request) {
+func (state *State) AddSession(userId string, session *Session) {
+	state.activeUsers[userId] = session
+}
+
+func (state *State) DropSession(userId string) {
+	state.activeUsersMutex.Lock()
+	defer state.activeUsersMutex.Unlock()
+	delete(state.activeUsers, userId)
+}
+
+func serveWS_V0(se *State) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		user, err := context.GetCurrentUser(r)
+		if err != nil {
+			utils.JSONForbiddenError(w, "Invalid user", "")
+			return
+		}
+
 		conn, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
 			return
@@ -80,6 +102,8 @@ func serveWSENV_V0(se *State) func(w http.ResponseWriter, r *http.Request) {
 		sess := Session{}
 		sess.Initialize(conn, se)
 		go sess.Writer()
+		se.AddSession(user.Id.String(), &sess)
 		sess.Reader()
+		se.DropSession(user.Id.String())
 	}
 }
