@@ -2,6 +2,7 @@ package models
 
 import (
 	"gopkg.in/mgo.v2/bson"
+	"math/rand"
 	"time"
 )
 
@@ -94,6 +95,22 @@ func (activity *Activity) AddChatMessage(basicUser BasicUserResponse, text strin
 func (activity *Activity) Create() error {
 	if !activity.Id.Valid() {
 		activity.Id = bson.NewObjectId()
+	}
+	var start time.Time
+	start = time.Now().AddDate(0, 0, rand.Intn(6)).Add(time.Hour * (time.Duration(rand.Intn(6) - 3)))
+	start = start.Add(-1 * time.Minute * time.Duration(start.Minute()))
+	activity.TimePeriod = &TimePeriod{
+		Start: start,
+		End:   start.Add(time.Hour * time.Duration(activity.DurationHours)),
+	}
+	if activity.TimePeriod.End.Hour() > 18 && !activity.IsEvening {
+		delta := time.Hour * time.Duration(activity.TimePeriod.End.Hour()-18)
+		activity.TimePeriod.End.Add(-1 * delta)
+		activity.TimePeriod.Start.Add(-1 * delta)
+	} else if activity.TimePeriod.Start.Hour() < 8 {
+		delta := time.Hour * time.Duration(8-activity.TimePeriod.Start.Hour())
+		activity.TimePeriod.End.Add(delta)
+		activity.TimePeriod.Start.Add(delta)
 	}
 	return activitiesC.Insert(activity)
 }
