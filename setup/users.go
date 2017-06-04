@@ -56,7 +56,7 @@ func setupUsers() error {
 		Age:                28,
 		TravelledCountries: []string{"Poland", "Bolivia", "Brazil"},
 		From:               "Singapore",
-		Interests:          []string{"Bars", "Parties", "Kayaking"},
+		Interests:          []string{"Bars", "Parties", "Kayaking", "Diving"},
 	}
 	err = florenceD.Create()
 	if err != nil {
@@ -101,7 +101,7 @@ func setupUsers() error {
 		Age:                36,
 		TravelledCountries: []string{"Philippines", "Malaysia", "Sweden"},
 		From:               "Russia",
-		Interests:          []string{"Biking", "Skiing", "Kayaking"},
+		Interests:          []string{"Biking", "Skiing", "Kayaking", "Diving"},
 	}
 	err = paulG.Create()
 	if err != nil {
@@ -116,7 +116,7 @@ func setupUsers() error {
 		Age:                38,
 		TravelledCountries: []string{"Norway", "Bulgaria", "Peru"},
 		From:               "Poland",
-		Interests:          []string{"Drawing", "Surfing", "Theater"},
+		Interests:          []string{"Drawing", "Surfing", "Theater", "Diving"},
 	}
 	err = stephenH.Create()
 	if err != nil {
@@ -146,7 +146,7 @@ func setupUsers() error {
 		Age:                22,
 		TravelledCountries: []string{"South Africa", "Argentina", "Venezuela"},
 		From:               "Spain",
-		Interests:          []string{"Kayaking", "Shopping", "Museum"},
+		Interests:          []string{"Kayaking", "Shopping", "Museum", "Caving"},
 	}
 	err = robertJ.Create()
 	if err != nil {
